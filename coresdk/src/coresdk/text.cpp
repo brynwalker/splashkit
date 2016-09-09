@@ -257,17 +257,42 @@ namespace splashkit_lib
         draw_text(text, clr, x, y, option_defaults());
     }
 
-    int text_height(font &fnt, string text, int font_size)
+    int text_height(font the_font, const string &the_text, int font_size)
     {
-        if (INVALID_PTR(fnt, FONT_PTR))
+        if (INVALID_PTR(the_font, FONT_PTR))
         {
             LOG(WARNING) << "Attempting to get string height with invalid font";
             return 0;
         }
 
+        if (the_text.length() == 0)
+        {
+            LOG(WARNING) << "Attempting to get string height of string of length 0";
+            return 0;
+        }
+
         int w = 0, h = 0;
-        sk_text_size(fnt, font_size, text.c_str(), &w, &h);
+        sk_text_size(the_font, font_size, the_text.c_str(), &w, &h);
         return h;
+    }
+
+    int text_width(font the_font, const string &the_text, int font_size)
+    {
+        if (INVALID_PTR(the_font, FONT_PTR))
+        {
+            LOG(WARNING) << "Attempting to get string width with invalid font";
+            return 0;
+        }
+
+        if (the_text.length() == 0)
+        {
+            LOG(WARNING) << "Attempting to get string width of string of length 0";
+            return 0;
+        }
+
+        int w = 0, h = 0;
+        sk_text_size(the_font, font_size, the_text.c_str(), &w, &h);
+        return w * text_length(the_text, the_font, font_size);
     }
     
     int text_length(const string &text, font fnt, int font_size)

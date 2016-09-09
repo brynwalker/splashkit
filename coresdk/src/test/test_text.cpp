@@ -114,6 +114,12 @@ void run_text_test()
     load_font("kochi", "kochi-gothic-subst.ttf");
     draw_text("スプラッシュ・キット", COLOR_BLACK, "kochi", 30, 0, 280);
 
+    int h = text_height(font_named("leaguegothic"), "height test", 50);
+    draw_text(to_string(h), COLOR_BLACK, 0, 310);
+
+    int w = text_width(font_named("leaguegothic"), "width test ", 50);
+    draw_text(to_string(h), COLOR_BLACK, 0, 340);
+
     refresh_screen();
     delay(5000);
 

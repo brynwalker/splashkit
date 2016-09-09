@@ -304,6 +304,10 @@ namespace splashkit_lib
      */
     void draw_text(const string &text, const color &clr, float x, float y);
 
+    int text_height(font the_font, const string &the_text, int font_size);
+
+    int text_width(font the_font, const string &the_text, int font_size);
+
     /**
      * @brief Returns the length of the supplied text string.
      *
