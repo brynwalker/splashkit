@@ -15,6 +15,8 @@
 #include "graphics_driver.h"
 
 #include <map>
+#include <stdlib.h>
+
 namespace splashkit_lib
 {
     static map<string, font> _fonts;
@@ -253,6 +255,19 @@ namespace splashkit_lib
     void draw_text(const string &text, const color &clr, float x, float y)
     {
         draw_text(text, clr, x, y, option_defaults());
+    }
+
+    int text_height(font &fnt, string text, int font_size)
+    {
+        if (INVALID_PTR(fnt, FONT_PTR))
+        {
+            LOG(WARNING) << "Attempting to get string height with invalid font";
+            return 0;
+        }
+
+        int w = 0, h = 0;
+        sk_text_size(fnt, font_size, text.c_str(), &w, &h);
+        return h;
     }
     
     int text_length(const string &text, font fnt, int font_size)
